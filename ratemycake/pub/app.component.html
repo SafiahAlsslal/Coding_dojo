@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+  <h1>RATE MY CAKE ! </h1>
+  <div>
+    <h2>Add a new cake : </h2>
+    <form (submit)="onSubmit()">
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <input type="text" class="form-control mb-2" name="name" [(ngModel)]="newcake.name" placeholder="Baker name">
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control mb-2" name="url" [(ngModel)]="newcake.url" placeholder="Img url">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div style="height: 400px; width: 500px ; overflow: scroll;">
+    <h2>Cakes list:</h2>
+    <ul>
+      <li *ngFor="let x of cakes">
+        <h3> {{x.name}} </h3>
+        <img (click)="showcake(x._id)" src={{x.url}} alt="cake">
+        <form (submit)="addRate(x._id)">
+          <!-- <p> {{ newrate | json }} </p> -->
+          <select class="form-control" name="rating" [(ngModel)]="newrate.rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <textarea name="comment" cols="20" rows="2" class="form-control" placeholder="type your comment"
+            [(ngModel)]="newrate.comment"></textarea>
+          <input type="submit" value="Rate" />
+        </form>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <br>
+  <br>
+  <app-cake *ngIf="cakeinfo" [caketoshow]="cakeinfo" [edited]="edited"></app-cake>
+
+  <router-outlet></router-outlet>
+</body>
