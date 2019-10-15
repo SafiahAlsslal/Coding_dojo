@@ -1,0 +1,11 @@
+<div *ngIf="edited==true">
+  <h1>baked by {{caketoshow.name}} </h1>
+  <img src={{caketoshow.url}} alt="cake">
+  <h3> Average rating : {{caketoshow.average}} </h3>
+  <ul>
+    <li *ngFor="let x of caketoshow.rating">
+      Rate: {{x.rating}} <br>
+      Comment : {{x.comment}}
+    </li>
+  </ul>
+</div>
